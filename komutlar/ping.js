@@ -1,24 +1,24 @@
-const Discord = require('discord.js')
- 
-exports.run = async (client ,message, args) =>{
+const Discord = require("discord.js");
 
-  
-  const embed = new Discord.MessageEmbed()
-  .setTitle("Pingim")
-  .setColor("RANDOM")
-  .setDescription(`${client.ws.ping} ms`)
-  message.channel.send(embed)
-};
-exports.conf = {
- enabled: true,
- guildOnly: false,
- aliases: ['ping'],
- permLevel: 0
-};
- 
-exports.help = {
- name: 'ping',
- description: 'Botun Pingine Bakarsın',
- usage: '!ping'
-};
- 
+module.exports = {
+    name: "ping", // komutumuzun adı
+    aliases: ["gecikme","ms"], // komutumuzun diğer kullanımları
+    description: "Botun Pingini Ölçer", // komutumuzun açıklaması burayı sallayabilirsiniz farketmez
+    usage: "ping", // komutumuzun kullanımı
+    ownerOnly: false, // herkes kullanabilir mi yoksa sadece bot sahibi mi kullanabilir eğer false yaparsanız herkes kullanabilir
+
+    run: async (message,args,client) => {
+const ping2 = new Discord.MessageEmbed() // embedimizi tanımladık
+.setColor("RANDOM") // embed rengi
+.setDescription(`Pingimi ${client.ws.ping} MS Olarak Ölçtüm!`) // pingimizi belirledik
+
+const ping = new Discord.MessageEmbed() // embedimizi tanımladık
+.setColor("RANDOM") // embed rengi
+.setDescription(`Pingim Ölçülüyor....`) // pingimizin ölçüldüğünü belirttik
+message.channel.send(ping).then(m => { // ilk olarak Pingim Ölçülüyor... mesajını atmasını ayarladık
+    setTimeout(() => {
+        m.edit(ping2) // sonra mesajı pingi söyleyerek editleyecek
+    }, 5000); // burası da kaç saniye de editleyeceği || 1000 = 1 saniye || 5000 = 5 saniye
+})
+
+    }}
