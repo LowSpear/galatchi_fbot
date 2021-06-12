@@ -1,26 +1,32 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 
-    run: async (message,args,client) => {
-const ping2 = new Discord.MessageEmbed() // embedimizi tanımladık
-.setColor("RANDOM") // embed rengi
-.setDescription(`Pingimi ${client.ws.ping} MS Olarak Ölçtüm!`) // pingimizi belirledik
+exports.run = async (client, message, args,) => {
+  const useruser = "Komut "  + message.author.username + " tarafından çalıştırıldı";
+  const userurl = message.author.avatarURL;
+  const bayrak = ":flag_tr:";
+  const ping = `${Math.round(client.ping)}ms`;
 
-const ping = new Discord.MessageEmbed() // embedimizi tanımladık
-.setColor("RANDOM") // embed rengi
-.setDescription(`Pingim Ölçülüyor....`) // pingimizin ölçüldüğünü belirttik
-message.channel.send(ping).then(m => { // ilk olarak Pingim Ölçülüyor... mesajını atmasını ayarladık
-    setTimeout(() => {
-        m.edit(ping2) // sonra mesajı pingi söyleyerek editleyecek
-    }, 5000); // burası da kaç saniye de editleyeceği || 1000 = 1 saniye || 5000 = 5 saniye
-    
-    
-    
-    module.exports = {
-    name: "ping", // komutumuzun adı
-    aliases: ["gecikme","ms"], // komutumuzun diğer kullanımları
-    description: "Botun Pingini Ölçer", // komutumuzun açıklaması burayı sallayabilirsiniz farketmez
-    usage: "ping", // komutumuzun kullanımı
-    ownerOnly: false, // herkes kullanabilir mi yoksa sadece bot sahibi mi kullanabilir eğer false yaparsanız herkes kullanabilir
-})
+let embed = new Discord.RichEmbed()
+.setTitle(':shield: Anlık Gecikme Süresi :shield:')
+.setColor("#00FF00")
+.addField("Ping :", ping)
+.addField("Lokasyon :", bayrak)
+.setFooter(useruser, userurl)
+.setTimestamp();
 
-    }}
+message.channel.send(embed);
+
+}
+
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: 0
+};
+
+exports.help = {
+  name: 'ping',
+  description: 'Gecikme süresini gösterir.',
+  usage: 'ping'
+};
