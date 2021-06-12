@@ -1,1 +1,1 @@
-worker node başlat.bat
+worker node index.js
