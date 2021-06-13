@@ -6,15 +6,9 @@ exports.run = async (client, message, args,) => {
   const bayrak = ":flag_tr:";
   const ping = `${Math.round(client.ping)}ms`;
 
-let embed = new Discord.RichEmbed()
-.setTitle(':shield: Anlık Gecikme Süresi :shield:')
-.setColor("#00FF00")
-.addField("Ping :", ping)
-.addField("Lokasyon :", bayrak)
-.setFooter(useruser, userurl)
-.setTimestamp();
-
-message.channel.send(embed);
+"Mesaj Gecikmesi: {ping1} ms \nBot Gecikmesi: {ping2} ms"
+        .replace("{ping1}", new Date().getTime() - message.createdTimestamp)
+        .replace("{ping2}", client.ws.ping),true)
 
 }
 
